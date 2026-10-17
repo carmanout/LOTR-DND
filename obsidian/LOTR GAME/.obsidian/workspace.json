@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Fichas/Unidades/Balrog.md",
+                "file": "Fichas/Unidades/Uruk-hai (Espada y Escudo).md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Balrog"
+              "title": "Uruk-hai (Espada y Escudo)"
             }
           }
         ]
@@ -115,7 +115,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Fichas/Unidades/Balrog.md",
+                "file": "Fichas/Unidades/Uruk-hai (Espada y Escudo).md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -134,7 +134,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Fichas/Unidades/Balrog.md",
+                "file": "Fichas/Unidades/Uruk-hai (Espada y Escudo).md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -177,7 +177,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Fichas/Unidades/Balrog.md",
+                "file": "Fichas/Unidades/Uruk-hai (Espada y Escudo).md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -206,8 +206,9 @@
   },
   "active": "373b720ba34adbbc",
   "lastOpenFiles": [
-    "Fichas/Personajes/Gandalf el Gris.md",
     "Fichas/Unidades/Balrog.md",
+    "Fichas/Unidades/Uruk-hai (Espada y Escudo).md",
+    "Fichas/Personajes/Gandalf el Gris.md",
     "Escenarios/Minas de Moria.md",
     "Ejercitos/Comunidad del anillo.md",
     "Ejercitos/Ejército de Moria.md",
