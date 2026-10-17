@@ -1,0 +1,5 @@
+x1 [[Saruman el Blanco]]
+x1 [[Lurtz]]
+x1 [[Uruk-hai fanático]]
+x1 [[Uruk-hai (Lanceros)]]
+x1 [[Uruk-hai (Espada y Escudo)]]
