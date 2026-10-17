@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Escenarios/Minas de Moria.md",
+                "file": "Fichas/Unidades/Balrog.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Minas de Moria"
+              "title": "Balrog"
             }
           }
         ]
@@ -115,7 +115,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Escenarios/Minas de Moria.md",
+                "file": "Fichas/Unidades/Balrog.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -134,7 +134,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Escenarios/Minas de Moria.md",
+                "file": "Fichas/Unidades/Balrog.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -177,7 +177,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Escenarios/Minas de Moria.md",
+                "file": "Fichas/Unidades/Balrog.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -206,10 +206,11 @@
   },
   "active": "373b720ba34adbbc",
   "lastOpenFiles": [
-    "Ejercitos/Ejército de Moria.md",
+    "Fichas/Personajes/Gandalf el Gris.md",
+    "Fichas/Unidades/Balrog.md",
     "Escenarios/Minas de Moria.md",
     "Ejercitos/Comunidad del anillo.md",
-    "Fichas/Personajes/Gandalf el Gris.md",
+    "Ejercitos/Ejército de Moria.md",
     "Ejercitos/Comunidad del Anillo",
     "Bienvenido.md",
     "Escenarios",

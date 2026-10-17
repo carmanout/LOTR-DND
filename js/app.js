@@ -104,6 +104,7 @@ function renderInline(value) {
   const formatText = (text) => escapeHtml(text)
     .replace(/`([^`]+)`/g, '<code>$1</code>')
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/(^|[\s([{])_([^_\r\n]+?)_(?=$|[\s)\]},.!?:;])/g, '$1<em>$2</em>')
     .replace(/\*(.+?)\*/g, '<em>$1</em>');
   const citationPattern = /\[\[(.*?)\]\]/g;
   let html = '';
@@ -141,6 +142,7 @@ function renderMarkdown(markdown) {
     const line = lines[index];
     const heading = line.match(/^(#{1,4})\s+(.+)$/);
     const listItem = line.match(/^\s*([-*+] |\d+\. )(.+)$/);
+    const statblockEntry = line.match(/^\*\*(.+?)\*\*[.:]\s*(.+)$/);
     const divider = lines[index + 1] ? splitTableRow(lines[index + 1]) : [];
     if (line.includes('|') && divider.length && divider.every((cell) => /^:?-{3,}:?$/.test(cell))) {
       closeParagraph(); closeList();
@@ -164,6 +166,9 @@ function renderMarkdown(markdown) {
       }
       index -= 1;
       output.push(`<blockquote><p>${quote.map(renderInline).join('<br>')}</p></blockquote>`);
+    } else if (statblockEntry) {
+      closeParagraph(); closeList();
+      output.push(`<section class="statblock-entry"><h5>${escapeHtml(statblockEntry[1])}</h5><p>${renderInline(statblockEntry[2])}</p></section>`);
     } else if (heading) {
       closeParagraph(); closeList();
       const level = Math.min(heading[1].length + 2, 6);
@@ -187,6 +192,13 @@ function categoryLabel(category) {
   return ({ personaje: 'Personaje', unidad: 'Unidad', ejercito: 'Ejército', escenario: 'Escenario', otro: 'Crónica' })[category];
 }
 
+function noteCategoryLabel(note) {
+  const declared = note.metadata.categoria || note.metadata.category;
+  return note.metadata.ca !== undefined && note.metadata.pg !== undefined && declared
+    ? String(declared)
+    : categoryLabel(note.category);
+}
+
 function formatFieldName(name) {
   return name.replace(/[_-]/g, ' ').replace(/\b\w/g, (letter) => letter.toUpperCase());
 }
@@ -197,22 +209,55 @@ function visibleFields(metadata) {
     .filter(([key, value]) => !hidden.has(key) && value !== '');
 }
 
+function formatMetadataValue(value) {
+  return Array.isArray(value) ? value.join(', ') : String(value);
+}
+
+function renderDndStatBlock(metadata) {
+  const primaryStats = [
+    ['ca', 'Clase de armadura'],
+    ['pg', 'Puntos de golpe'],
+    ['velocidad', 'Velocidad'],
+  ].filter(([key]) => metadata[key] !== undefined);
+  const abilities = ['fue', 'des', 'con', 'int', 'sab', 'car'].filter((key) => metadata[key] !== undefined);
+  const saves = Object.entries(metadata).filter(([key]) => key.startsWith('ts '));
+  const groupedProperties = new Set(['ca', 'pg', 'velocidad', 'fue', 'des', 'con', 'int', 'sab', 'car', 'categoria', 'ts fue', 'ts des', 'ts con', 'ts int', 'ts sab', 'ts car', 'nombre', 'name', 'tipo', 'type', 'tags', 'etiquetas', 'aliases', 'cssclass']);
+  const properties = Object.entries(metadata).filter(([key]) => !groupedProperties.has(key));
+  const saveLine = saves.length
+    ? `<div><dt>Tiradas de salvación</dt><dd>${saves.map(([key, value]) => `${escapeHtml(key.slice(3).toUpperCase())} ${escapeHtml(formatMetadataValue(value))}`).join(', ')}</dd></div>`
+    : '';
+
+  return `<section class="dnd-statblock" aria-label="Estadísticas de combate">
+    <dl class="dnd-primary-stats">${primaryStats.map(([key, label]) => `<div><dt>${label}</dt><dd>${escapeHtml(formatMetadataValue(metadata[key]))}</dd></div>`).join('')}</dl>
+    <div class="dnd-abilities" aria-label="Características">${abilities.map((key) => {
+      const score = Number(metadata[key]);
+      const modifier = Number.isFinite(score) ? Math.floor((score - 10) / 2) : null;
+      const modifierLabel = modifier === null ? '' : `${modifier >= 0 ? '+' : ''}${modifier}`;
+      return `<div class="dnd-ability"><span>${key.toUpperCase()}</span><strong>${escapeHtml(formatMetadataValue(metadata[key]))}</strong><small>${modifierLabel}</small></div>`;
+    }).join('')}</div>
+    <dl class="dnd-defenses">${saveLine}${properties.map(([key, value]) => `<div><dt>${escapeHtml(formatFieldName(key))}</dt><dd>${escapeHtml(formatMetadataValue(value))}</dd></div>`).join('')}</dl>
+  </section>`;
+}
+
 function createCard(note, index) {
   const card = document.createElement('article');
   card.className = `note-card category-${note.category}`;
   card.dataset.notePath = note.path;
   card.style.setProperty('--card-order', index);
+  const hasDndStats = note.metadata.ca !== undefined && note.metadata.pg !== undefined;
   const tags = note.tags.slice(0, 3).map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join('');
   const fields = visibleFields(note.metadata);
   const stats = fields.length
     ? `<dl class="card-stats">${fields.slice(0, 4).map(([key, value]) => `<div><dt>${escapeHtml(formatFieldName(key))}</dt><dd>${escapeHtml(Array.isArray(value) ? value.join(', ') : value)}</dd></div>`).join('')}</dl>`
     : '';
-  const summary = note.summary
+  const summary = hasDndStats
+    ? '<p class="card-summary">Ficha de combate D&amp;D</p>'
+    : note.summary
     ? `<p class="card-summary">${renderInline(note.summary)}</p>`
     : '<p class="card-summary muted">Sin descripción todavía.</p>';
 
   card.innerHTML = `
-    <div class="card-topline"><span class="category-mark" aria-hidden="true">${note.category === 'personaje' ? '✦' : note.category === 'escenario' ? '⌖' : '⚔'}</span><span class="category-label">${categoryLabel(note.category)}</span></div>
+    <div class="card-topline"><span class="category-mark" aria-hidden="true">${note.category === 'personaje' ? '✦' : note.category === 'escenario' ? '⌖' : '⚔'}</span><span class="category-label">${escapeHtml(noteCategoryLabel(note))}</span></div>
     <h3>${escapeHtml(note.title)}</h3>
     ${summary}
     ${stats}
@@ -224,10 +269,15 @@ function createCard(note, index) {
 function openNote(note) {
   const isOpen = noteDialog.open;
   const fields = visibleFields(note.metadata);
+  const hasDndStats = note.metadata.ca !== undefined && note.metadata.pg !== undefined;
   detailTitle.textContent = note.title;
-  detailCategory.textContent = categoryLabel(note.category);
+  detailCategory.textContent = hasDndStats ? noteCategoryLabel(note) : categoryLabel(note.category);
   detailSymbol.textContent = note.category === 'escenario' ? '⌖' : note.category === 'unidad' || note.category === 'ejercito' ? '⚔' : '✦';
-  detailMetadata.innerHTML = fields.map(([key, value]) => `<div><dt>${escapeHtml(formatFieldName(key))}</dt><dd>${escapeHtml(Array.isArray(value) ? value.join(', ') : value)}</dd></div>`).join('');
+  detailMetadata.innerHTML = hasDndStats
+    ? renderDndStatBlock(note.metadata)
+    : fields.length
+      ? `<dl class="metadata-fields detail-metadata-list">${fields.map(([key, value]) => `<div><dt>${escapeHtml(formatFieldName(key))}</dt><dd>${escapeHtml(formatMetadataValue(value))}</dd></div>`).join('')}</dl>`
+      : '';
   detailTags.innerHTML = note.tags.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join('');
   detailBody.innerHTML = renderMarkdown(note.body) || '<p class="muted">Esta nota todavía no tiene contenido.</p>';
   detailPath.textContent = note.path.replace(/^.*?LOTR GAME\//, '');
