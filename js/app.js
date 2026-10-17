@@ -1,4 +1,6 @@
-const VAULT_ROOT = new URL('../obsidian/LOTR%20GAME/', document.currentScript.src);
+const APP_ROOT = new URL('../', document.currentScript.src);
+const VAULT_ROOT = new URL('obsidian/LOTR%20GAME/', APP_ROOT);
+const NOTE_INDEX = new URL('obsidian/notes-index.json', APP_ROOT);
 const grid = document.querySelector('#note-grid');
 const status = document.querySelector('#archive-status');
 const searchInput = document.querySelector('#search-input');
@@ -29,7 +31,7 @@ function cleanName(value) {
 
 function getCategory(path, metadata) {
   const declared = `${metadata.tipo || ''} ${metadata.type || ''} ${metadata.categoria || ''} ${metadata.category || ''}`.toLowerCase();
-  const folders = path.toLowerCase();
+  const folders = `/${path.toLowerCase()}/`;
   if (folders.includes('/personajes/') || /personaje|character/.test(declared)) return 'personaje';
   if (folders.includes('/unidades/') || /unidad|unit/.test(declared)) return 'unidad';
   if (folders.includes('/ejercitos/') || /ejercito|ejército|army/.test(declared)) return 'ejercito';
@@ -251,26 +253,38 @@ async function loadArchive() {
   status.textContent = 'Abriendo los archivos...';
   grid.replaceChildren();
   try {
-    const directories = [VAULT_ROOT];
-    const noteUrls = [];
-    while (directories.length) {
-      const directoryUrl = directories.shift();
-      const response = await fetch(directoryUrl);
-      if (!response.ok) throw new Error(`No se pudo leer ${directoryUrl.pathname} (${response.status}).`);
-      const documentListing = new DOMParser().parseFromString(await response.text(), 'text/html');
-      for (const anchor of documentListing.querySelectorAll('a[href]')) {
-        const target = new URL(anchor.getAttribute('href'), directoryUrl);
-        if (target.origin !== VAULT_ROOT.origin || !target.pathname.startsWith(VAULT_ROOT.pathname)) continue;
-        const name = decodeURIComponent(target.pathname.split('/').filter(Boolean).pop() || '');
-        if (!name || name.startsWith('.') || name.toLowerCase() === '.trash') continue;
-        if (target.pathname.endsWith('/') && target.href !== directoryUrl.href) directories.push(target);
-        else if (/\.md$/i.test(name)) noteUrls.push(target);
+    const manifestPaths = await fetch(NOTE_INDEX, { cache: 'no-store' })
+      .then((response) => response.ok ? response.json() : [])
+      .then((paths) => Array.isArray(paths)
+        ? paths.filter((path) => typeof path === 'string' && /^((?!\.\.?(?:\/|$)).)*\.md$/i.test(path))
+        : []);
+    const discoveredPaths = [];
+    try {
+      const directories = [VAULT_ROOT];
+      while (directories.length) {
+        const directoryUrl = directories.shift();
+        const response = await fetch(directoryUrl);
+        if (!response.ok) throw new Error(`No se pudo leer ${directoryUrl.pathname} (${response.status}).`);
+        const documentListing = new DOMParser().parseFromString(await response.text(), 'text/html');
+        for (const anchor of documentListing.querySelectorAll('a[href]')) {
+          const target = new URL(anchor.getAttribute('href'), directoryUrl);
+          if (target.origin !== VAULT_ROOT.origin || !target.pathname.startsWith(VAULT_ROOT.pathname)) continue;
+          const name = decodeURIComponent(target.pathname.split('/').filter(Boolean).pop() || '');
+          if (!name || name.startsWith('.') || name.toLowerCase() === '.trash') continue;
+          if (target.pathname.endsWith('/') && target.href !== directoryUrl.href) directories.push(target);
+          else if (/\.md$/i.test(name)) discoveredPaths.push(decodeURIComponent(target.pathname.slice(VAULT_ROOT.pathname.length)));
+        }
       }
+    } catch (error) {
+      console.info('El servidor no permite recorrer carpetas; se usará el índice publicado.', error);
     }
-    const loaded = await Promise.all(noteUrls.map(async (url) => {
+    const notePaths = [...new Set([...manifestPaths, ...discoveredPaths])];
+    if (!notePaths.length) throw new Error('No hay notas en el índice ni se pudieron recorrer las carpetas.');
+    const loaded = await Promise.all(notePaths.map(async (path) => {
+      const url = new URL(path.split('/').map(encodeURIComponent).join('/'), VAULT_ROOT);
       const response = await fetch(url);
       if (!response.ok) return null;
-      return parseNote(await response.text(), decodeURIComponent(url.pathname));
+      return parseNote(await response.text(), path);
     }));
     notes = loaded.filter(Boolean).sort((a, b) => a.title.localeCompare(b.title, 'es'));
     updateCounts();
@@ -279,7 +293,7 @@ async function loadArchive() {
   } catch (error) {
     notes = [];
     updateCounts();
-    status.textContent = 'No se pudo leer la bóveda. Abre este proyecto desde un servidor local para cargar sus notas.';
+    status.textContent = 'No se pudo leer la bóveda. Comprueba que el índice de notas esté publicado junto al proyecto.';
     console.error('Error al cargar la bóveda:', error);
   }
 }
