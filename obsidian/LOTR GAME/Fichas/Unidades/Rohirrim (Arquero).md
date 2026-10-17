@@ -1,29 +1,28 @@
 ---
-Categoria: Monstruo
-CA: "15"
-PG: "15"
+Categoria: Humanoide
+CA: "16"
+PG: "16"
 Velocidad: 30 pies
-FUE: "16"
+FUE: "13"
 DES: "12"
-CON: "16"
-INT: "7"
+CON: "12"
+INT: "10"
 SAB: "11"
 CAR: "10"
-Habilidades: Acrobacias +2
-Sentidos: Visión en la oscuridad 60 pies
+habilidades: Atletismo +3, Percepción +2
 ---
 ## Rasgos
 
-**Agresivo**. Como acción adicional, el orco puede moverse hasta su velocidad hacia una criatura hostil que pueda ver.
+**Mantener la formación**. Si un aliado a 5 pies o menos del soldado debe realizar una tirada de salvación, el soldado anima al aliado, lo que le concede ventaja en la tirada.
 
 ## Acciones
 
-**Espada**. _Ataque de arma cuerpo a cuerpo:_ +5 al ataque, alcance 5 pies, un objetivo. _Impacto:_ (1d12+3) puntos de daño cortante.
+**Arco largo**. _Ataque de arma a distancia:_ +3 al ataque, alcance 150/600 pies, un objetivo. _Impacto:_ (1d8+1) puntos de daño perforante.
 
 ### Historia
 
-Los **Uruk-hai espadachines** fueron la infantería pesada de élite creada por Saruman en Isengard durante la Guerra del Anillo. A diferencia de los piqueros, que formaban falanges con lanzas largas, estos guerreros portaban **espadas cortas de hoja ancha** y **escudos negros** blasonados con la Mano Blanca, además de armaduras negras y yelmos con la runa «S».
+Los **Rohirrim**, o «Señores de los Caballos» en sindarin, fueron un pueblo de jinetes que habitó las llanuras de Rohan, conocidas como la Marca de los Jinetes. Descendían de los **Éothéod**, un pueblo nórdico del norte que criaba caballos y que, en el año 2510 de la Tercera Edad, acudió en ayuda de Gondor contra los invasores balchoth. Como recompensa, el Senescal Cirion les entregó a perpetuidad la provincia de Calenardhon, que pasó a llamarse Rohan. Su rey, **Eorl el Joven**, juró amistad eterna con Gondor, un vínculo que perduró durante siglos.
 
-Saruman los engendró mezclando orcos con humanos para resistir la luz del sol y combatir con disciplina. Eran más altos y fuertes que los orcos comunes, y su equipo refinado contrastaba con las cimitarras curvas de sus parientes menores.
+Se llamaban a sí mismos **Eorlingas**, «los hijos de Eorl», y se organizaban en torno a un rey que gobernaba desde Edoras. Eran altos, rubios y de ojos azules, y su sociedad giraba en torno a la cría de caballos, la poesía y la guerra. Su idioma, el rohírrico, estaba emparentado con el de los hombres del norte.
 
-Su historial bélico incluye la emboscada en Amon Hen, donde Lurtz y sus espadachines atacaron a la Comunidad, y la batalla del Abismo de Helm, donde formaron la vanguardia de asalto tras los berserkers. También integraron la partida que capturó a Merry y Pippin, enfrentándose a los jinetes de Rohan. Aunque finalmente fueron derrotados en Helm y en los Vados del Isen, los Uruk-hai con espada y escudo quedaron como la expresión más letal de la industria militar de Saruman.
+Su momento más glorioso llegó en la **Batalla de los Campos del Pelennor**, el 15 de marzo de 3019. Liderados por el rey **Théoden**, los Rohirrim cargaron al amanecer contra los ejércitos de Mordor, dispersando a la infantería y la caballería enemigas y matando al líder de los haradrim. Aunque la carga fue inicialmente victoriosa, la llegada del Rey Brujo sembró el caos. Théoden cayó, pero su sobrina **Éowyn** y el hobbit **Meriadoc** se enfrentaron al espectro, cumpliendo la profecía de que «ningún hombre» podría matarlo. La intervención de los Rohirrim fue decisiva para la victoria final en el Pelennor.

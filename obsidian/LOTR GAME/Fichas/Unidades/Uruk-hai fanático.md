@@ -1,6 +1,6 @@
 ---
 Categoria: Monstruo
-CA: "15"
+CA: "13"
 PG: "15"
 Velocidad: 30 pies
 FUE: "16"

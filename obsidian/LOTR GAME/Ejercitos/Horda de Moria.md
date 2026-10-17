@@ -1,5 +1,5 @@
 x1 [[Balrog]]
-x1 [[Trol de las Cavernas]]
+x1 [[Troll de las Cavernas]]
 x1 [[Trasgos (Lanza)]]
 x1 [[Trasgos (Espada)]]
 x1 [[Trasgos (Arqueros)]]

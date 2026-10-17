@@ -1,46 +1,27 @@
 ---
 Categoria: Monstruo
-CA: "19"
-PG: "262"
-Velocidad: 40 pies, 80 pies volando
-FUE: "26"
-DES: "15"
-CON: "22"
-INT: "20"
-SAB: "16"
-CAR: "22"
-TS FUE: "+14"
-TS CON: "+12"
-TS SAB: "+9"
-TS CAR: "+12"
-Resistencias: Frío, Relámpago; armas no mágicas
-Inmunidades: Fuego, Veneno, Envenenado
+CA: "13"
+PG: "7"
+Velocidad: 30 pies
+FUE: "8"
+DES: "14"
+CON: "10"
+INT: "10"
+SAB: "8"
+CAR: "8"
+Habilidades: Sigilo +6
+Sentidos: Visión en la oscuridad 60 pies
 ---
 ## Rasgos
 
-**Muerte agónica**. Cuando el Balrog muere, explota, y toda criatura que se encuentre a 30 pies o menos de él debe hacer una tirada de salvación de Destreza CD 20; si falla, recibe (20d6) puntos de daño por fuego y, si tiene éxito, la mitad. La explosión quema los objetos inflamables dentro del área que nadie lleve puestos ni transporte y destruye las armas del Balrog.
-
-**Aura de fuego**. Al principio de cada turno del Balrog, todas las criaturas que se encuentren a 5 pies o menos de él reciben (3d6) puntos de daño por fuego y los objetos inflamables que nadie lleve puestos ni transporte arden. Una criatura que toque al Balrog o le impacte con un ataque cuerpo a cuerpo mientras esté a 5 pies o menos de él recibe (3d6) puntos de daño por fuego.
-
-**Resistencia mágica**. El Balrog tiene ventaja en las tiradas de salvación contra conjuros y otros efectos mágicos.
-
-**Armas mágicas**. Los ataques de arma del Balrog son mágicos.
+**Huida veloz**. El trasgo puede realizar una acción de retirarse o esconderse como acción adicional en cada uno de sus turnos.
 
 ## Acciones
 
-**Multiataque**. El Balrog realiza dos ataques: uno con su espada larga y otro con su látigo.
-
-**Espada larga**. _Ataque de arma cuerpo a cuerpo:_ +14 al ataque, alcance 10 pies, un objetivo. Impacto: (3d8+8) puntos de daño cortante más (3d8) puntos de daño por relámpago. Si el bálor saca un crítico, tira tres veces el daño en lugar de dos.
-
-**Látigo**. _Ataque de arma cuerpo a cuerpo:_ +14 al ataque, alcance 30 pies, un objetivo. _Impacto:_ (2d6+8) puntos de daño cortante más (3d6) puntos de daño por fuego y el objetivo debe superar una tirada de salvación de Fuerza CD 20 para no ser empujado hasta 25 pies hacia el bálor.
-
-**Teleportarse**. El Balrog se teleporta mágicamente, junto con cualquier equipo que lleve o transporte, hasta 120 pies hacia un lugar sin ocupar que pueda ver.
+**Arco corto**. _Ataque de arma a distancia:_ +4 al ataque, alcance 80/320 pies, un objetivo. _Impacto:_ (1d6+2) puntos de daño perforante.
 
 ### Historia
 
-Antes de que existieran los reinos de los Enanos, el Balrog ya servía a Morgoth. Cuando su señor fue derrotado al final de la Primera Edad, huyó de la luz y se ocultó bajo las Montañas Nubladas. Allí permaneció durante siglos, sepultado bajo la piedra y olvidado por los pueblos de la superficie.
+Los **trasgos de Moria**, también llamados orcos de Moria, no fueron los arquitectos de Khazad-dûm, sino sus usurpadores. Tras el despertar del **Balrog** en el año 1980 de la Tercera Edad, los enanos abandonaron sus grandes salones, y bandas de orcos procedentes del norte, de las Montañas Nubladas, se infiltraron en la mina para saquear sus riquezas de _mithril_ y oro. Con el tiempo, se convirtieron en una población permanente que habitaba los túneles oscuros bajo el dominio del Balrog.
 
-En el año 1980 de la Tercera Edad, los Enanos de Khazad-dûm excavaron demasiado hondo en busca de mithril y despertaron a la criatura. El Balrog mató al rey Durin VI; al año siguiente también cayó su hijo Náin I. Los supervivientes abandonaron Moria y el reino quedó en manos de Orcos y de aquella presencia que desde entonces llamaron el Daño de Durin.
-
-Muchos años después, la Compañía atravesó las minas y Gandalf se enfrentó al Balrog en el puente de Khazad-dûm. Ambos cayeron al abismo. La persecución continuó por las profundidades hasta la cima de Zirakzigil, donde Gandalf venció a la criatura, pero murió a causa de las heridas. Así terminó el largo dominio del Daño de Durin sobre Moria.
-
+Su historia bélica está marcada por la agresividad. Bajo el liderazgo de **Azog**, desafiaron a los enanos y provocaron la Guerra de los Enanos y los Orcos, que culminó con la muerte de Azog en la Batalla de Azanulbizar. Años después, cuando **Balin** intentó reclamar Moria en 2989, los trasgos lo emboscaron y lo mataron, desatando un asedio que acabó con su colonia. Durante la **Guerra del Anillo**, atacaron a la Compañía del Anillo en la Cámara de Mazarbul y persiguieron a los viajeros hasta Lothlórien. Aunque no sirvieron directamente a Sauron, su presencia en Moria mantuvo la ruta subterránea cerrada durante siglos.

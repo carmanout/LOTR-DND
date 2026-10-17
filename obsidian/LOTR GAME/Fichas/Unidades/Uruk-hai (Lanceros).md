@@ -1,6 +1,6 @@
 ---
 Categoria: Monstruo
-CA: "15"
+CA: "13"
 PG: "15"
 Velocidad: 30 pies
 FUE: "16"
@@ -18,7 +18,7 @@ Sentidos: Visión en la oscuridad 60 pies
 
 ## Acciones
 
-**Espada**. _Ataque de arma cuerpo a cuerpo:_ +5 al ataque, alcance 5 pies, un objetivo. _Impacto:_ (1d12+3) puntos de daño cortante.
+**Lanza**. _Ataque de arma cuerpo a cuerpo:_ +5 al ataque, alcance 10 pies, un objetivo. _Impacto:_ (1d12+3) puntos de daño perforante.
 
 ### Historia
 
