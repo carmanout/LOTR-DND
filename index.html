@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="theme-color" content="#17231c">
+		<meta name="description" content="Compendio de personajes, ejércitos y escenarios de la Tierra Media.">
+		<title>Crónicas de la Tierra Media</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="style/main.css">
+		<script src="js/app.js" defer></script>
+	</head>
+	<body>
+		<div class="app-shell">
+			<header class="topbar">
+				<a class="brand" href="#inicio" aria-label="Crónicas de la Tierra Media, inicio">
+					<span class="brand-mark" aria-hidden="true">✦</span>
+					<span class="brand-name">Crónicas <span>de la Tierra Media</span></span>
+				</a>
+				<div class="topbar-meta"><span class="live-dot"></span> Archivo de campaña</div>
+			</header>
+
+			<main id="inicio">
+				<section class="masthead" aria-labelledby="page-title">
+					<div class="masthead-copy">
+						<p class="eyebrow"><span class="eyebrow-rule"></span> Atlas de campaña <span class="eyebrow-rule"></span></p>
+						<h1 id="page-title">El libro de<br><em>las tierras libres</em></h1>
+						<p class="masthead-description">Personajes, huestes y lugares que dan forma a la aventura.</p>
+					</div>
+					<div class="masthead-ornament" aria-hidden="true">
+						<span class="ring ring-outer"></span><span class="ring ring-inner"></span>
+						<span class="north-star">✦</span><span class="compass-line compass-v"></span><span class="compass-line compass-h"></span>
+						<span class="compass-label compass-n">N</span><span class="compass-label compass-s">S</span>
+						<span class="compass-label compass-e">E</span><span class="compass-label compass-w">O</span>
+					</div>
+					<div class="masthead-bottom"><span>TERCERA EDAD</span><span class="bottom-divider"></span><span>ARCHIVO VIVO</span></div>
+				</section>
+
+				<section class="collection" aria-label="Archivo de la bóveda">
+					<div class="collection-heading">
+						<div>
+							<p class="section-kicker">La bóveda</p>
+							<h2>Registro de la compañía</h2>
+						</div>
+						<button class="refresh-button" id="refresh-button" type="button" title="Volver a cargar las notas" aria-label="Volver a cargar las notas">
+							<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5"></path><path d="M5.6 9a7 7 0 0 1 11.6-2L20 12M4 12l2.8 5a7 7 0 0 0 11.6-2"></path></svg>
+						</button>
+					</div>
+
+					<div class="archive-stats" aria-label="Resumen del archivo">
+						<div class="archive-stat"><span class="stat-value" id="total-count">—</span><span class="stat-label">Notas halladas</span></div>
+						<div class="stat-divider"></div>
+						<div class="archive-stat"><span class="stat-value" id="character-count">—</span><span class="stat-label">Personajes</span></div>
+						<div class="stat-divider"></div>
+						<div class="archive-stat"><span class="stat-value" id="army-count">—</span><span class="stat-label">Huestes</span></div>
+						<div class="stat-divider"></div>
+						<div class="archive-stat"><span class="stat-value" id="scenario-count">—</span><span class="stat-label">Escenarios</span></div>
+					</div>
+
+					<div class="toolbar">
+						<nav class="filters" aria-label="Filtrar el archivo">
+							<button class="filter-button is-active" type="button" data-filter="all" aria-pressed="true">Todo</button>
+							<button class="filter-button" type="button" data-filter="personaje" aria-pressed="false">Personajes</button>
+							<button class="filter-button" type="button" data-filter="unidad" aria-pressed="false">Unidades</button>
+							<button class="filter-button" type="button" data-filter="ejercito" aria-pressed="false">Ejércitos</button>
+							<button class="filter-button" type="button" data-filter="escenario" aria-pressed="false">Escenarios</button>
+						</nav>
+						<label class="search-box">
+							<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 4.5 4.5"></path></svg>
+							<input id="search-input" type="search" placeholder="Buscar en las crónicas" autocomplete="off">
+							<kbd>/</kbd>
+						</label>
+					</div>
+
+					<div id="archive-status" class="archive-status" role="status" aria-live="polite">Abriendo los archivos...</div>
+					<div id="note-grid" class="note-grid"></div>
+					<div id="empty-state" class="empty-state" hidden>
+						<span class="empty-sigil" aria-hidden="true">✦</span>
+						<h3>No hay notas en esta senda</h3>
+						<p>Prueba otra búsqueda o cambia el filtro.</p>
+					</div>
+					<p class="archive-footnote"><span class="footnote-star">✦</span> Las notas se leen directamente desde <code>obsidian/LOTR GAME</code>.</p>
+				</section>
+			</main>
+			<dialog id="note-dialog" class="note-dialog" aria-labelledby="detail-title">
+				<div class="note-page">
+					<header class="note-page-header">
+						<button class="detail-back" id="detail-back" type="button">
+							<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path><path d="M9 12h11"></path></svg>
+							<span>Volver al archivo</span>
+						</button>
+						<span class="detail-archive-label">Crónicas de la Tierra Media</span>
+						<button class="detail-close" id="detail-close" type="button" aria-label="Cerrar ficha" title="Cerrar ficha">
+							<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg>
+						</button>
+					</header>
+					<div class="detail-scroll">
+						<article class="detail-article">
+							<p class="detail-kicker"><span id="detail-symbol" aria-hidden="true">✦</span><span id="detail-category"></span></p>
+							<h1 id="detail-title"></h1>
+							<div id="detail-tags" class="tag-row detail-tags"></div>
+							<dl id="detail-metadata" class="metadata-fields detail-metadata"></dl>
+							<div id="detail-body" class="markdown-body detail-markdown"></div>
+							<p id="detail-path" class="note-path detail-path"></p>
+						</article>
+					</div>
+				</div>
+			</dialog>
+			<footer class="site-footer"><span>Hecho para las historias que aún quedan por contar</span><span class="footer-mark">✦</span><span>TIERRA MEDIA · ARCHIVO DE CAMPAÑA</span></footer>
+		</div>
+	</body>
+</html>
