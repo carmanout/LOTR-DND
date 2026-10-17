@@ -1,6 +1,8 @@
 const APP_ROOT = new URL('../', document.currentScript.src);
 const VAULT_ROOT = new URL('obsidian/LOTR%20GAME/', APP_ROOT);
-const NOTE_INDEX = new URL('obsidian/notes-index.json', APP_ROOT);
+const GITHUB_REPOSITORY = 'carmanout/LOTR-DND';
+const GITHUB_BRANCH = 'main';
+const VAULT_REPOSITORY_PATH = 'obsidian/LOTR GAME/';
 const grid = document.querySelector('#note-grid');
 const status = document.querySelector('#archive-status');
 const searchInput = document.querySelector('#search-input');
@@ -253,33 +255,8 @@ async function loadArchive() {
   status.textContent = 'Abriendo los archivos...';
   grid.replaceChildren();
   try {
-    const manifestPaths = await fetch(NOTE_INDEX, { cache: 'no-store' })
-      .then((response) => response.ok ? response.json() : [])
-      .then((paths) => Array.isArray(paths)
-        ? paths.filter((path) => typeof path === 'string' && /^((?!\.\.?(?:\/|$)).)*\.md$/i.test(path))
-        : []);
-    const discoveredPaths = [];
-    try {
-      const directories = [VAULT_ROOT];
-      while (directories.length) {
-        const directoryUrl = directories.shift();
-        const response = await fetch(directoryUrl);
-        if (!response.ok) throw new Error(`No se pudo leer ${directoryUrl.pathname} (${response.status}).`);
-        const documentListing = new DOMParser().parseFromString(await response.text(), 'text/html');
-        for (const anchor of documentListing.querySelectorAll('a[href]')) {
-          const target = new URL(anchor.getAttribute('href'), directoryUrl);
-          if (target.origin !== VAULT_ROOT.origin || !target.pathname.startsWith(VAULT_ROOT.pathname)) continue;
-          const name = decodeURIComponent(target.pathname.split('/').filter(Boolean).pop() || '');
-          if (!name || name.startsWith('.') || name.toLowerCase() === '.trash') continue;
-          if (target.pathname.endsWith('/') && target.href !== directoryUrl.href) directories.push(target);
-          else if (/\.md$/i.test(name)) discoveredPaths.push(decodeURIComponent(target.pathname.slice(VAULT_ROOT.pathname.length)));
-        }
-      }
-    } catch (error) {
-      console.info('El servidor no permite recorrer carpetas; se usará el índice publicado.', error);
-    }
-    const notePaths = [...new Set([...manifestPaths, ...discoveredPaths])];
-    if (!notePaths.length) throw new Error('No hay notas en el índice ni se pudieron recorrer las carpetas.');
+    const notePaths = await discoverNotePaths();
+    if (!notePaths.length) throw new Error('No se encontraron notas Markdown en la bóveda.');
     const loaded = await Promise.all(notePaths.map(async (path) => {
       const url = new URL(path.split('/').map(encodeURIComponent).join('/'), VAULT_ROOT);
       const response = await fetch(url);
@@ -293,9 +270,63 @@ async function loadArchive() {
   } catch (error) {
     notes = [];
     updateCounts();
-    status.textContent = 'No se pudo leer la bóveda. Comprueba que el índice de notas esté publicado junto al proyecto.';
+    status.textContent = 'No se pudo leer la bóveda. Comprueba que el repositorio sea público y que sus notas estén publicadas.';
     console.error('Error al cargar la bóveda:', error);
   }
+}
+
+async function discoverLocalNotePaths() {
+  const directories = [VAULT_ROOT];
+  const notePaths = [];
+  while (directories.length) {
+    const directoryUrl = directories.shift();
+    const response = await fetch(directoryUrl);
+    if (!response.ok) throw new Error(`No se pudo recorrer ${directoryUrl.pathname} (${response.status}).`);
+    const listing = new DOMParser().parseFromString(await response.text(), 'text/html');
+    for (const anchor of listing.querySelectorAll('a[href]')) {
+      const target = new URL(anchor.getAttribute('href'), directoryUrl);
+      if (target.origin !== VAULT_ROOT.origin || !target.pathname.startsWith(VAULT_ROOT.pathname)) continue;
+      const name = decodeURIComponent(target.pathname.split('/').filter(Boolean).pop() || '');
+      if (!name || name.startsWith('.') || name.toLowerCase() === '.trash') continue;
+      if (target.pathname.endsWith('/') && target.href !== directoryUrl.href) directories.push(target);
+      else if (/\.md$/i.test(name)) notePaths.push(decodeURIComponent(target.pathname.slice(VAULT_ROOT.pathname.length)));
+    }
+  }
+  return [...new Set(notePaths)];
+}
+
+async function discoverGitHubNotePaths() {
+  const treeUrl = `https://api.github.com/repos/${GITHUB_REPOSITORY}/git/trees/${GITHUB_BRANCH}?recursive=1`;
+  const response = await fetch(treeUrl, {
+    headers: { Accept: 'application/vnd.github+json' },
+    cache: 'no-cache',
+  });
+  if (!response.ok) throw new Error(`GitHub no pudo devolver el árbol del repositorio (${response.status}).`);
+  const repositoryTree = await response.json();
+  if (repositoryTree.truncated) throw new Error('GitHub truncó el árbol del repositorio.');
+  return repositoryTree.tree
+    .filter((entry) => entry.type === 'blob' && entry.path.startsWith(VAULT_REPOSITORY_PATH) && /\.md$/i.test(entry.path))
+    .map((entry) => entry.path.slice(VAULT_REPOSITORY_PATH.length))
+    .filter((path) => path.split('/').every((part) => !part.startsWith('.') && part.toLowerCase() !== '.trash'));
+}
+
+async function discoverNotePaths() {
+  const isGitHubPages = window.location.hostname.endsWith('.github.io');
+  const sources = isGitHubPages
+    ? [discoverGitHubNotePaths, discoverLocalNotePaths]
+    : [discoverLocalNotePaths, discoverGitHubNotePaths];
+  let lastError;
+  for (const discover of sources) {
+    try {
+      const paths = await discover();
+      if (paths.length) return paths;
+    } catch (error) {
+      lastError = error;
+      console.info('No se pudieron recorrer las notas desde esta fuente.', error);
+    }
+  }
+  if (lastError) throw lastError;
+  return [];
 }
 
 filterButtons.forEach((button) => button.addEventListener('click', () => {
