@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Ejercitos/Comunidad del anillo.md",
+                "file": "Escenarios/Minas de Moria.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Comunidad del anillo"
+              "title": "Minas de Moria"
             }
           }
         ]
@@ -115,7 +115,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Ejercitos/Comunidad del anillo.md",
+                "file": "Escenarios/Minas de Moria.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -134,7 +134,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Ejercitos/Comunidad del anillo.md",
+                "file": "Escenarios/Minas de Moria.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -177,7 +177,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Ejercitos/Comunidad del anillo.md",
+                "file": "Escenarios/Minas de Moria.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -206,8 +206,10 @@
   },
   "active": "373b720ba34adbbc",
   "lastOpenFiles": [
-    "Fichas/Personajes/Gandalf el Gris.md",
+    "Ejercitos/Ejército de Moria.md",
+    "Escenarios/Minas de Moria.md",
     "Ejercitos/Comunidad del anillo.md",
+    "Fichas/Personajes/Gandalf el Gris.md",
     "Ejercitos/Comunidad del Anillo",
     "Bienvenido.md",
     "Escenarios",
