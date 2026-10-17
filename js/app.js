@@ -305,10 +305,13 @@ async function loadArchive() {
   status.textContent = 'Abriendo los archivos...';
   grid.replaceChildren();
   try {
-    const notePaths = await discoverNotePaths();
+    const { paths: notePaths, source } = await discoverNotePaths();
     if (!notePaths.length) throw new Error('No se encontraron notas Markdown en la bóveda.');
     const loaded = await Promise.all(notePaths.map(async (path) => {
-      const url = new URL(path.split('/').map(encodeURIComponent).join('/'), VAULT_ROOT);
+      const encodedPath = `${VAULT_REPOSITORY_PATH}${path}`.split('/').map(encodeURIComponent).join('/');
+      const url = source === 'github'
+        ? new URL(`https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${GITHUB_BRANCH}/${encodedPath}`)
+        : new URL(path.split('/').map(encodeURIComponent).join('/'), VAULT_ROOT);
       const response = await fetch(url);
       if (!response.ok) return null;
       return parseNote(await response.text(), path);
@@ -369,14 +372,14 @@ async function discoverNotePaths() {
   for (const discover of sources) {
     try {
       const paths = await discover();
-      if (paths.length) return paths;
+      if (paths.length) return { paths, source: discover === discoverGitHubNotePaths ? 'github' : 'local' };
     } catch (error) {
       lastError = error;
       console.info('No se pudieron recorrer las notas desde esta fuente.', error);
     }
   }
   if (lastError) throw lastError;
-  return [];
+  return { paths: [], source: 'local' };
 }
 
 filterButtons.forEach((button) => button.addEventListener('click', () => {
