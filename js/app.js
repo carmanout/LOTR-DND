@@ -127,11 +127,17 @@ function renderMarkdown(markdown) {
   const lines = markdown.split(/\r?\n/);
   const output = [];
   let paragraph = [];
-  let listType = '';
+  const listStack = [];
   const splitTableRow = (line) => line.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map((cell) => cell.trim());
-  const closeList = () => {
-    if (listType) output.push(`</${listType}>`);
-    listType = '';
+  const closeListLevel = () => {
+    const list = listStack.pop();
+    if (list) {
+      if (list.hasItem) output.push('</li>');
+      output.push(`</${list.type}>`);
+    }
+  };
+  const closeLists = () => {
+    while (listStack.length) closeListLevel();
   };
   const closeParagraph = () => {
     if (paragraph.length) output.push(`<p>${paragraph.map(renderInline).join('<br>')}</p>`);
@@ -141,11 +147,11 @@ function renderMarkdown(markdown) {
   for (let index = 0; index < lines.length; index += 1) {
     const line = lines[index];
     const heading = line.match(/^(#{1,4})\s+(.+)$/);
-    const listItem = line.match(/^\s*([-*+] |\d+\. )(.+)$/);
+    const listItem = line.match(/^([ \t]*)([-*+]|\d+\.)\s+(.+)$/);
     const statblockEntry = line.match(/^\*\*(.+?)\*\*[.:]\s*(.+)$/);
     const divider = lines[index + 1] ? splitTableRow(lines[index + 1]) : [];
     if (line.includes('|') && divider.length && divider.every((cell) => /^:?-{3,}:?$/.test(cell))) {
-      closeParagraph(); closeList();
+      closeParagraph(); closeLists();
       const headers = splitTableRow(line);
       const rows = [];
       index += 2;
@@ -156,9 +162,9 @@ function renderMarkdown(markdown) {
       index -= 1;
       output.push(`<div class="table-scroll"><table><thead><tr>${headers.map((cell) => `<th>${renderInline(cell)}</th>`).join('')}</tr></thead><tbody>${rows.map((row) => `<tr>${headers.map((_, cellIndex) => `<td>${renderInline(row[cellIndex] || '')}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`);
     } else if (/^(---+|\*\*\*+|___+)$/.test(line.trim())) {
-      closeParagraph(); closeList(); output.push('<hr>');
+      closeParagraph(); closeLists(); output.push('<hr>');
     } else if (/^\s*>/.test(line)) {
-      closeParagraph(); closeList();
+      closeParagraph(); closeLists();
       const quote = [];
       while (index < lines.length && /^\s*>/.test(lines[index])) {
         quote.push(lines[index].replace(/^\s*>\s?/, '').trim());
@@ -167,24 +173,38 @@ function renderMarkdown(markdown) {
       index -= 1;
       output.push(`<blockquote><p>${quote.map(renderInline).join('<br>')}</p></blockquote>`);
     } else if (statblockEntry) {
-      closeParagraph(); closeList();
+      closeParagraph(); closeLists();
       output.push(`<section class="statblock-entry"><h5>${escapeHtml(statblockEntry[1])}</h5><p>${renderInline(statblockEntry[2])}</p></section>`);
     } else if (heading) {
-      closeParagraph(); closeList();
+      closeParagraph(); closeLists();
       const level = Math.min(heading[1].length + 2, 6);
       output.push(`<h${level}>${renderInline(heading[2])}</h${level}>`);
     } else if (listItem) {
       closeParagraph();
-      const nextType = /^\d/.test(listItem[1]) ? 'ol' : 'ul';
-      if (listType !== nextType) { closeList(); output.push(`<${nextType}>`); listType = nextType; }
-      output.push(`<li>${renderInline(listItem[2])}</li>`);
+      const indent = listItem[1].replace(/\t/g, '    ').length;
+      const nextType = /^\d/.test(listItem[2]) ? 'ol' : 'ul';
+      while (listStack.length && listStack[listStack.length - 1].indent > indent) closeListLevel();
+      let currentList = listStack[listStack.length - 1];
+      if (currentList && currentList.indent === indent && currentList.type !== nextType) {
+        closeListLevel();
+        currentList = listStack[listStack.length - 1];
+      }
+      if (!currentList || currentList.indent < indent) {
+        output.push(`<${nextType}>`);
+        listStack.push({ type: nextType, indent, hasItem: false });
+        currentList = listStack[listStack.length - 1];
+      } else if (currentList.hasItem) {
+        output.push('</li>');
+      }
+      output.push(`<li>${renderInline(listItem[3])}`);
+      currentList.hasItem = true;
     } else if (!line.trim()) {
-      closeParagraph(); closeList();
+      closeParagraph(); closeLists();
     } else {
-      closeList(); paragraph.push(line.trim());
+      closeLists(); paragraph.push(line.trim());
     }
   }
-  closeParagraph(); closeList();
+  closeParagraph(); closeLists();
   return output.join('');
 }
 
