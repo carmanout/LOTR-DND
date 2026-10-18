@@ -34,8 +34,6 @@ Inmunidades: Fuego, Veneno, Envenenado
 
 **Látigo**. _Ataque de arma cuerpo a cuerpo:_ +14 al ataque, alcance 30 pies, un objetivo. _Impacto:_ (2d6+8) puntos de daño cortante más (3d6) puntos de daño por fuego y el objetivo debe superar una tirada de salvación de Fuerza CD 20 para no ser empujado hasta 25 pies hacia el bálor.
 
-**Teleportarse**. El Balrog se teleporta mágicamente, junto con cualquier equipo que lleve o transporte, hasta 120 pies hacia un lugar sin ocupar que pueda ver.
-
 ### Historia
 
 Antes de que existieran los reinos de los Enanos, el Balrog ya servía a Morgoth. Cuando su señor fue derrotado al final de la Primera Edad, huyó de la luz y se ocultó bajo las Montañas Nubladas. Allí permaneció durante siglos, sepultado bajo la piedra y olvidado por los pueblos de la superficie.

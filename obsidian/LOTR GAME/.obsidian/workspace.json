@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Escenarios/2º - Amon Hen.md",
+                "file": "Fichas/Personajes/Gandalf el Gris.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2º - Amon Hen"
+              "title": "Gandalf el Gris"
             }
           }
         ]
@@ -190,8 +190,15 @@
   },
   "active": "09f859535203ff48",
   "lastOpenFiles": [
-    "Escenarios/1º - Minas de Moria.md",
+    "Fichas/Unidades/Balrog.md",
+    "Fichas/Personajes/Gandalf el Gris.md",
+    "Fichas/Personajes/Gandalf el Blanco.md",
+    "Reglas",
+    "Habilidades/Protección contra el bien y el mal.md",
+    "Habilidades/Sin título.md",
+    "Habilidades",
     "Escenarios/2º - Amon Hen.md",
+    "Escenarios/1º - Minas de Moria.md",
     "Objetos Especiales/Anillo único.md",
     "Objetos Especiales",
     "Ejercitos/Horda de Moria.md",
@@ -212,10 +219,6 @@
     "Fichas/Unidades/Rohirrim (Arquero).md",
     "Fichas/Unidades/Galadhrim (Arquero).md",
     "Fichas/Unidades/Gondoriano (Arquero).md",
-    "Fichas/Unidades/Gondoriano (Lanceros con escudo).md",
-    "Fichas/Unidades/Gondoriano (Espada y Escudo).md",
-    "Fichas/Unidades/Galadhrim (Espada).md",
-    "Fichas/Unidades/Balrog.md",
     "Ejercitos/Comunidad del Anillo",
     "Escenarios",
     "Fichas/Unidades",
