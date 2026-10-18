@@ -1,7 +1,7 @@
 ---
 Categoria: Monstruo
 CA: "19"
-PG: "262"
+PG: "131"
 Velocidad: 40 pies, 80 pies volando
 FUE: "26"
 DES: "15"
@@ -18,21 +18,23 @@ Inmunidades: Fuego, Veneno, Envenenado
 ---
 ## Rasgos
 
-**Muerte agónica**. Cuando el Balrog muere, explota, y toda criatura que se encuentre a 30 pies o menos de él debe hacer una tirada de salvación de Destreza CD 20; si falla, recibe (20d6) puntos de daño por fuego y, si tiene éxito, la mitad. La explosión quema los objetos inflamables dentro del área que nadie lleve puestos ni transporte y destruye las armas del Balrog.
+**Muerte agónica**. Cuando el Balrog muere, explota, y toda criatura que se encuentre a 30 pies o menos de él debe hacer una tirada de salvación de Destreza CD 20; si falla, recibe (10d6) puntos de daño por fuego y, si tiene éxito, la mitad. La explosión quema los objetos inflamables dentro del área que nadie lleve puestos ni transporte y destruye las armas del Balrog.
 
-**Aura de fuego**. Al principio de cada turno del Balrog, todas las criaturas que se encuentren a 5 pies o menos de él reciben (3d6) puntos de daño por fuego y los objetos inflamables que nadie lleve puestos ni transporte arden. Una criatura que toque al Balrog o le impacte con un ataque cuerpo a cuerpo mientras esté a 5 pies o menos de él recibe (3d6) puntos de daño por fuego.
+**Aura de fuego**. Al principio de cada turno del Balrog, todas las criaturas que se encuentren a 5 pies o menos de él reciben (1d6) puntos de daño por fuego y los objetos inflamables que nadie lleve puestos ni transporte arden. Una criatura que toque al Balrog o le impacte con un ataque cuerpo a cuerpo mientras esté a 5 pies o menos de él recibe (1d6) puntos de daño por fuego.
 
 **Resistencia mágica**. El Balrog tiene ventaja en las tiradas de salvación contra conjuros y otros efectos mágicos.
 
 **Armas mágicas**. Los ataques de arma del Balrog son mágicos.
 
+**Indomable**. Una vez al día, puede liberarse de cualquier prisión, encarcelamiento o agarre. Él y su opresor hacen TS de carisma enfrentadas. Si gana, queda liberado de cualquier efecto. El Balrog tiene desventaja en esta tirada si la realiza contra el efecto de un Istari.
+
 ## Acciones
 
 **Multiataque**. El Balrog realiza dos ataques: uno con su espada larga y otro con su látigo.
 
-**Espada larga**. _Ataque de arma cuerpo a cuerpo:_ +14 al ataque, alcance 10 pies, un objetivo. Impacto: (3d8+8) puntos de daño cortante más (3d8) puntos de daño por relámpago. Si el bálor saca un crítico, tira tres veces el daño en lugar de dos.
+**Espada larga**. _Ataque de arma cuerpo a cuerpo:_ +14 al ataque, alcance 10 pies, un objetivo. Impacto: (1d8+8) puntos de daño cortante más (3d8) puntos de daño por relámpago. Si el bálor saca un crítico, tira tres veces el daño en lugar de dos.
 
-**Látigo**. _Ataque de arma cuerpo a cuerpo:_ +14 al ataque, alcance 30 pies, un objetivo. _Impacto:_ (2d6+8) puntos de daño cortante más (3d6) puntos de daño por fuego y el objetivo debe superar una tirada de salvación de Fuerza CD 20 para no ser empujado hasta 25 pies hacia el bálor.
+**Látigo**. _Ataque de arma cuerpo a cuerpo:_ +14 al ataque, alcance 30 pies, un objetivo. _Impacto:_ (1d6+8) puntos de daño cortante más (3d6) puntos de daño por fuego y el objetivo debe superar una tirada de salvación de Fuerza CD 20 para no ser empujado hasta 25 pies hacia el bálor.
 
 ### Historia
 

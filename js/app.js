@@ -26,6 +26,16 @@ const counts = {
 
 let notes = [];
 let activeFilter = 'all';
+let currentNote = null;
+
+function noteHash(note) {
+  return `#${new URLSearchParams({ nota: note.path })}`;
+}
+
+function noteFromHash() {
+  const path = new URLSearchParams(window.location.hash.slice(1)).get('nota');
+  return path ? notes.find((note) => note.path === path) || null : null;
+}
 
 function cleanName(value) {
   return decodeURIComponent(value).replace(/\.md$/i, '').replace(/[-_]/g, ' ').trim();
@@ -286,8 +296,12 @@ function createCard(note, index) {
   return card;
 }
 
-function openNote(note) {
+function openNote(note, updateUrl = true) {
   const isOpen = noteDialog.open;
+  currentNote = note;
+  if (updateUrl && noteFromHash()?.path !== note.path) {
+    history.pushState({ notePath: note.path }, '', noteHash(note));
+  }
   const fields = visibleFields(note.metadata);
   const hasDndStats = note.metadata.ca !== undefined && note.metadata.pg !== undefined;
   detailTitle.textContent = note.title;
@@ -303,6 +317,18 @@ function openNote(note) {
   detailPath.textContent = note.path.replace(/^.*?LOTR GAME\//, '');
   detailScroll.scrollTop = 0;
   if (!isOpen) noteDialog.showModal();
+}
+
+function syncNoteFromUrl() {
+  const note = noteFromHash();
+  if (note) openNote(note, false);
+  else if (noteDialog.open) noteDialog.close();
+}
+
+function clearNoteUrl() {
+  if (new URLSearchParams(window.location.hash.slice(1)).has('nota')) {
+    history.replaceState(history.state, '', `${window.location.pathname}${window.location.search}`);
+  }
 }
 
 function updateCounts() {
@@ -340,6 +366,7 @@ async function loadArchive() {
     updateCounts();
     status.textContent = notes.length ? '' : 'Todavía no hay notas en la bóveda.';
     renderNotes();
+    syncNoteFromUrl();
   } catch (error) {
     notes = [];
     updateCounts();
@@ -434,9 +461,26 @@ noteDialog.addEventListener('click', (event) => {
 });
 document.querySelector('#detail-back').addEventListener('click', () => noteDialog.close());
 document.querySelector('#detail-close').addEventListener('click', () => noteDialog.close());
+document.querySelector('#detail-copy').addEventListener('click', async (event) => {
+  if (!currentNote) return;
+  const button = event.currentTarget;
+  const label = button.querySelector('span');
+  const originalLabel = label.textContent;
+  const link = new URL(window.location.href);
+  link.hash = noteHash(currentNote);
+  try {
+    await navigator.clipboard.writeText(link.href);
+    label.textContent = 'Enlace copiado';
+  } catch (error) {
+    label.textContent = 'No se pudo copiar';
+  }
+  window.setTimeout(() => { label.textContent = originalLabel; }, 1800);
+});
 noteDialog.addEventListener('click', (event) => {
   if (event.target === noteDialog) noteDialog.close();
 });
+noteDialog.addEventListener('close', clearNoteUrl);
+window.addEventListener('hashchange', syncNoteFromUrl);
 document.addEventListener('keydown', (event) => {
   if (event.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
     event.preventDefault();

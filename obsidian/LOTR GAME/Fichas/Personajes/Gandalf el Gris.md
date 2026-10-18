@@ -24,6 +24,7 @@ Habilidades: Arcanos +6, Historia +6
 - Una vez por descanso, puede lanzar sin gastar espacios de conjuro **Protección contra el bien y el mal**:
 	- Concentración 10 minutos. Hasta que el conjuro termine, una criatura voluntaria a la que tocas está protegida contra ciertos tipos de criaturas: aberraciones, celestiales, elementales, feéricos, infernales y no muertos. La protección garantiza;
 		- Las criaturas de esos tipos tienen desventaja en las tiradas de ataque que hagan contra el objetivo.
+		- La criatura tiene ventaja en TS contra las criaturas de esos tipos.
 		- El objetivo tampoco puede ser hechizado, asustado o poseído por ellas. Si el objetivo ya está hechizado, asustado o poseído por una criatura de ese tipo, tiene ventaja en una nueva tirada de salvación que haga contra el efecto pertinente.
 
 **Lanzamiento de conjuros**. El mago gris tiene los siguientes conjuros de mago preparados:

@@ -9,6 +9,7 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+		<link rel="icon" type="image/svg+xml" href="favicon.svg">
 		<link rel="stylesheet" href="style/main.css">
 		<script src="js/app.js" defer></script>
 	</head>
@@ -92,9 +93,15 @@
 							<span>Volver al archivo</span>
 						</button>
 						<span class="detail-archive-label">Crónicas de la Tierra Media</span>
-						<button class="detail-close" id="detail-close" type="button" aria-label="Cerrar ficha" title="Cerrar ficha">
-							<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg>
-						</button>
+						<div class="detail-actions">
+							<button class="detail-copy" id="detail-copy" type="button" title="Copiar enlace de esta ficha">
+								<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.1 0l2.1-2.1a5 5 0 0 0-7.1-7.1L10.9 5"></path><path d="M14 11a5 5 0 0 0-7.1 0l-2.1 2.1a5 5 0 0 0 7.1 7.1l1.2-1.2"></path></svg>
+								<span>Copiar enlace</span>
+							</button>
+							<button class="detail-close" id="detail-close" type="button" aria-label="Cerrar ficha" title="Cerrar ficha">
+								<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg>
+							</button>
+						</div>
 					</header>
 					<div class="detail-scroll">
 						<article class="detail-article">

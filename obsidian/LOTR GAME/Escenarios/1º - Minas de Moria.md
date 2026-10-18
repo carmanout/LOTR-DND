@@ -3,7 +3,7 @@
 ## Reglas iniciales
 
 - Unidades baneadas
-	- [[Aragron]]
+	- [[Aragorn]]
 - Condiciones de victoria
 	- [[Comunidad del anillo]]
 		- Huir del mapa.
