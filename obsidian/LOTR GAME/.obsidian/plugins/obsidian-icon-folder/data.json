@@ -1,0 +1,49 @@
+{
+  "settings": {
+    "migrated": 6,
+    "iconPacksPath": ".obsidian/icons",
+    "fontSize": 16,
+    "emojiStyle": "native",
+    "iconColor": null,
+    "recentlyUsedIcons": [
+      "LiCheck",
+      "LiChessKnight",
+      "LiChessPawn",
+      "LiUser2"
+    ],
+    "recentlyUsedIconsSize": 5,
+    "rules": [],
+    "extraMargin": {
+      "top": 0,
+      "right": 4,
+      "bottom": 0,
+      "left": 0
+    },
+    "iconInTabsEnabled": false,
+    "iconInTitleEnabled": false,
+    "iconInTitlePosition": "above",
+    "iconInFrontmatterEnabled": false,
+    "iconInFrontmatterFieldName": "icon",
+    "iconColorInFrontmatterFieldName": "iconColor",
+    "iconsBackgroundCheckEnabled": false,
+    "iconsInNotesEnabled": true,
+    "iconsInLinksEnabled": true,
+    "iconIdentifier": ":",
+    "lucideIconPackType": "native",
+    "debugMode": false,
+    "useInternalPlugins": false
+  },
+  "Fichas/Personajes": "LiUser2",
+  "Fichas/Unidades": {
+    "iconName": "LiCheck",
+    "iconColor": "#029400"
+  },
+  "Fichas/Personajes/Bárbaro": {
+    "iconName": "LiCheck",
+    "iconColor": "#008f24"
+  },
+  "Fichas/Personajes/Bardo": {
+    "iconName": "LiCheck",
+    "iconColor": "#009e03"
+  }
+}

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Ejercitos/Huestes de Isengrad.md",
+                "file": "Fichas/Personajes/Bardo/Pippin Tuk.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Huestes de Isengrad"
+              "title": "Pippin Tuk"
             }
           }
         ]
@@ -83,7 +83,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 371.5
+    "width": 230.5
   },
   "right": {
     "id": "0f21dd6781f2ac0f",
@@ -190,40 +190,41 @@
   },
   "active": "24a2d1abdb476d05",
   "lastOpenFiles": [
+    "Fichas/Personajes/Clérigo/Merry Brandigamo.md",
+    "Fichas/Personajes/Bardo/Pippin Tuk.md",
+    "Fichas/Personajes/Bárbaro/Troll de las Cavernas.md",
+    "Fichas/Personajes/Bárbaro/Gimli.md",
+    "Fichas/Personajes/Paladín/Theoden.md",
+    "Fichas/Personajes/Explorador/Trancos.md",
     "Ejercitos/Aliados de Rohan.md",
-    "Ejercitos/Comunidad del anillo.md",
     "Ejercitos/Defensores de Gondor.md",
+    "Ejercitos/Comunidad del anillo.md",
     "Ejercitos/Horda de Moria.md",
     "Ejercitos/Huestes de Isengrad.md",
-    "Fichas/Personajes/Gandalf el Blanco.md",
-    "Fichas/Personajes/Gandalf el Gris.md",
-    "Fichas/Personajes/Frodo Bolsón.md",
-    "Fichas/Personajes/Fáramir.md",
-    "Fichas/Unidades/Trasgos (Arqueros).md",
-    "Fichas/Personajes/Bóromir.md",
-    "Fichas/Personajes/Merry Brandigamo.md",
-    "Fichas/Personajes/Pippin Tuk.md",
-    "Fichas/Personajes/Gimli.md",
-    "Fichas/Personajes/Legolas.md",
-    "Fichas/Personajes/Trancos.md",
-    "Fichas/Personajes/Aragorn.md",
-    "Fichas/Unidades/Galadhrim (Arquero).md",
-    "Fichas/Personajes/Sam Gamyi.md",
-    "Fichas/Unidades/Balrog.md",
-    "Fichas/Unidades/Gondoriano (Espada y Escudo).md",
-    "Fichas/Unidades/Rohirrim (Arquero).md",
     "Fichas/Unidades/Galadhrim (Espada).md",
-    "Fichas/Unidades/Troll de las Cavernas.md",
+    "Fichas/Unidades/Rohirrim (Lanza y escudo).md",
+    "Fichas/Unidades/Uruk-hai (Espada y Escudo).md",
     "Fichas/Unidades/Uruk-hai (Espada).md",
-    "Fichas/Personajes/Saruman el Blanco.md",
-    "Reglas",
-    "Habilidades",
-    "Objetos Especiales",
-    "Ejercitos/Comunidad del Anillo",
-    "Escenarios",
-    "Fichas/Unidades",
-    "Fichas/Personajes",
-    "Fichas",
-    "Ejercitos"
+    "Fichas/Unidades/Uruk-hai (Lanceros).md",
+    "Fichas/Unidades/Gondoriano (Espada y Escudo).md",
+    "Fichas/Unidades/Gondoriano (Arquero).md",
+    "Fichas/Unidades/Galadhrim (Arquero).md",
+    "Fichas/Unidades/Trasgos (Lanza).md",
+    "Fichas/Unidades/Trasgos (Espada y Escudo).md",
+    "Fichas/Unidades/Trasgos (Arqueros).md",
+    "Fichas/Unidades/Rohirrim (Espada y Escudo).md",
+    "Fichas/Unidades/Rohirrim (Arquero).md",
+    "Fichas/Unidades/Gondoriano (Lanceros con escudo).md",
+    "Fichas/Personajes/Guerrero/Fáramir.md",
+    "Fichas/Personajes/Pícaro",
+    "Fichas/Personajes/Paladín",
+    "Fichas/Personajes/Monje",
+    "Fichas/Personajes/Mago",
+    "Fichas/Personajes/Hechicero",
+    "Fichas/Personajes/Explorador",
+    "Fichas/Personajes/Druida",
+    "Fichas/Personajes/Clérigo",
+    "Fichas/Personajes/Brujo",
+    "Fichas/Personajes/Bardo"
   ]
 }

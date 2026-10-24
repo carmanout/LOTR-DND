@@ -1,15 +1,7 @@
 x1 [[Saruman el Blanco]]
 x1 [[Lurtz]]
-x3 [[Uruk-hai (Espada)]]
-x15 [[Uruk-hai (Lanceros)]]
-x15 [[Uruk-hai (Espada y Escudo)]]
+x3 [[Uruk-hai (Espada)]] - 1/2
+x15 [[Uruk-hai (Lanceros)]] - 1/2
+x15 [[Uruk-hai (Espada y Escudo)]] - 1/2
 
-uruk - 1/2
-
-total = 17/27
-
-
-faltan [[Saruman el Blanco]] y [[Lurtz]]
-
-saruman - 7
-lurtz - 3
+VD - 16.5 + 2H

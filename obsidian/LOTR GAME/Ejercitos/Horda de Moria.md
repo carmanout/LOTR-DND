@@ -1,12 +1,8 @@
 x1 [[Balrog]]
-x1 [[Troll de las Cavernas]]
-x12 [[Trasgos (Lanza)]]
-x22 [[Trasgos (Arqueros)]]
-x11 [[Trasgos (Espada y Escudo)]]
+x1 [[Troll de las Cavernas]] - 3
+x12 [[Trasgos (Lanza)]]  - 1/4
+x22 [[Trasgos (Arqueros)]] - 1/4
+x11 [[Trasgos (Espada y Escudo)]] - 1/4
 
 
-Trasgos - 1/4
-Troll - 5
-Balrog - 10
-
-Total - 27/27
+VD - 14.25 + 1H
